@@ -9,11 +9,12 @@ import net.minecraft.entity.mob.SpiderEntity;
 public class Kaleidoscopes implements ModInitializer
 {
     public static final String ID = "kaleidoscopes";
-    public static final Logger LOGGER = LoggerFactory.getLogger(ID);
+    public static final Logger LOGGER = LoggerFactory.getLogger( ID );
 
     @Override
-    public void onInitialize() {
-
+    public void onInitialize()
+    {
+        KaleidoscopesConstants.initialize();
         //LOGGER.info("[Mod ID] pretty pink princess ponies prancing perpendicular");
     }
 }

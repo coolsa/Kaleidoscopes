@@ -32,6 +32,7 @@
 			"xyz.coolsa.kaleidoscopes.Kaleidoscopes"
 		],
 		"client": [
+            "xyz.coolsa.kaleidoscopes.client.Client"
 		]
 	}
 }
