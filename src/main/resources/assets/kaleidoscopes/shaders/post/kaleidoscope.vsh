@@ -19,4 +19,3 @@ void main(){
     texCoord = Position.xy;
     ProjMat2 = ProjMat;
 }
-

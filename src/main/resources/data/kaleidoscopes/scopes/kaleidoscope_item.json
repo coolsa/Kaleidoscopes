@@ -1,0 +1,7 @@
+{
+    "item": "kaleidoscope_item",
+    "sounds": {
+        "start": "kaleidoscope_start_sound",
+        "stop": "kaleidoscope_stop_sound"
+    }
+}

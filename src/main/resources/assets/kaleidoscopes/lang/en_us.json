@@ -1,5 +1,5 @@
 {
     "item.kaleidoscopes.kaleidoscope_item": "Basic Kaleidoscope",
     "subtitles.item.kaleidoscope_item.stop_using": "Kaleidoscope retracts",
-    "subtitles.item.kaleidoscope_item.use": "Kaleidoscope extends"
+    "subtitles.item.kaleidoscope_item.start_using": "Kaleidoscope extends"
 }

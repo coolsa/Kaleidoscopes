@@ -6,7 +6,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.model.ModelBaker;
+import net.minecraft.client.texture.Sprite;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.entity.EquipmentSlot;
@@ -14,6 +20,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RotationAxis;
+import org.joml.Matrix4f;
 import xyz.coolsa.kaleidoscopes.Kaleidoscopes;
 import xyz.coolsa.kaleidoscopes.KaleidoscopesConstants;
 
@@ -109,5 +117,39 @@ public class KaleidoscopeHud implements HudElement
     {
         MinecraftClient.getInstance().gameRenderer.setPostProcessor( null );
         MinecraftClient.getInstance().gameRenderer.togglePostProcessorEnabled();
+    }
+    // Referenced from InGameOverlayRenderer
+    public static void renderFireOverlay( MatrixStack matrices, VertexConsumerProvider vertexConsumers) {
+        Sprite sprite = ModelBaker.FIRE_1.getSprite();
+        VertexConsumer vertexConsumer = vertexConsumers.getBuffer( RenderLayer.getFireScreenEffect(sprite.getAtlasId()));
+        float f = sprite.getMinU();
+        float g = sprite.getMaxU();
+        float h = (f + g) / 2.0F;
+        float i = sprite.getMinV();
+        float j = sprite.getMaxV();
+        float k = (i + j) / 2.0F;
+        float l = sprite.getUvScaleDelta();
+        float m = MathHelper.lerp(l, f, h);
+        float n = MathHelper.lerp(l, g, h);
+        float o = MathHelper.lerp(l, i, k);
+        float p = MathHelper.lerp(l, j, k);
+        float q = 1.0F;
+
+        for (int r = 0; r < 2; r++) {
+            matrices.push();
+            float s = -0.5F;
+            float t = 0.5F;
+            float u = -0.5F;
+            float v = 0.5F;
+            float w = -0.5F;
+            matrices.translate(-(r * 2 - 1) * 0.24F, -0.3F, 0.0F);
+            matrices.multiply( RotationAxis.POSITIVE_Y.rotationDegrees((r * 2 - 1) * 10.0F));
+            Matrix4f matrix4f = matrices.peek().getPositionMatrix();
+            vertexConsumer.vertex(matrix4f, -0.5F, -0.5F, -0.5F).texture(n, p).color(1.0F, 1.0F, 1.0F, 0.9F);
+            vertexConsumer.vertex(matrix4f, 0.5F, -0.5F, -0.5F).texture(m, p).color(1.0F, 1.0F, 1.0F, 0.9F);
+            vertexConsumer.vertex(matrix4f, 0.5F, 0.5F, -0.5F).texture(m, o).color(1.0F, 1.0F, 1.0F, 0.9F);
+            vertexConsumer.vertex(matrix4f, -0.5F, 0.5F, -0.5F).texture(n, o).color(1.0F, 1.0F, 1.0F, 0.9F);
+            matrices.pop();
+        }
     }
 }

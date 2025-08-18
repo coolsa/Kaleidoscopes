@@ -1,6 +1,6 @@
 {
     "textures": {
-        "spyglass": "item/spyglass_model",
+        "spyglass": "kaleidoscopes:item/kaleidoscope_model",
         "particle": "#spyglass"
     },
     "elements": [
