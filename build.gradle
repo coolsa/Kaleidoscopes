@@ -12,6 +12,10 @@ base.archivesName = project.slug
 repositories {
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/kaleidoscopes.accesswidener")
+}
+
 dependencies {
 	minecraft libs.mc
 	mappings variantOf(libs.yarn) { classifier "v2" }

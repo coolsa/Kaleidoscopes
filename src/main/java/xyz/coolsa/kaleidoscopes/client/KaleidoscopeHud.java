@@ -23,12 +23,6 @@ public class KaleidoscopeHud implements HudElement
 {
     private float kaleidoscopeScale;
     private MinecraftClient client;
-    public static final RenderPipeline GUI_TEXTURED = RenderPipelines.register( RenderPipeline.builder(
-            RenderPipelines.POSITION_TEX_COLOR_SNIPPET )
-        .withVertexShader( "core/kaleidoscope" )
-        .withFragmentShader( "core/kaleidoscope" )
-        .withLocation( "pipeline/gui_textured" ).build()
-    );
 
     public KaleidoscopeHud()
     {
@@ -45,10 +39,12 @@ public class KaleidoscopeHud implements HudElement
         {
             if( clientPlayerEntity.isUsingItem() && clientPlayerEntity.getActiveItem().isOf( KaleidoscopesConstants.KALEIDOSCOPE_ITEM ) )
             {
+                this.setPostEffect( Identifier.of( Kaleidoscopes.ID, "kaleidoscope" ) );
                 this.renderKaleidoscopeOverlay( context, this.kaleidoscopeScale );
             }
             else
             {
+                this.clearPostEffect();
                 this.kaleidoscopeScale = 0.5F;
 
                 for( EquipmentSlot equipmentSlot : EquipmentSlot.values() )
@@ -72,8 +68,8 @@ public class KaleidoscopeHud implements HudElement
     {
         int i = ColorHelper.getWhite( opacity );
         context.drawTexture(
-            RenderPipelines.GUI_TEXTURED,
-            texture,
+            KaleidoscopesConstants.GUI_TEXTURED,
+            KaleidoscopesConstants.KALEIDOSCOPE_TEXTURE,
             0,
             0,
             0.0F,
@@ -96,12 +92,22 @@ public class KaleidoscopeHud implements HudElement
         int l = (context.getScaledWindowHeight() - j) / 2;
         int m = k + i;
         int n = l + j;
-        Kaleidoscopes.LOGGER.info( "" + GUI_TEXTURED);
-        context.drawTexture( GUI_TEXTURED, KaleidoscopesConstants.KALEIDOSCOPE_TEXTURE, k, l, 0.0F, 0.0F, i, j, i, j );
-//        context.drawTexture( RenderPipelines.GUI_TEXTURED, KaleidoscopesConstants.KALEIDOSCOPE_SCOPE, k, l, 0.0F, 0.0F, i, j, i, j );
-//        context.fill( RenderPipelines.GUI, 0, n, context.getScaledWindowWidth(), context.getScaledWindowHeight(), -16777216 );
-//        context.fill( RenderPipelines.GUI, 0, 0, context.getScaledWindowWidth(), l, -16777216 );
-//        context.fill( RenderPipelines.GUI, 0, l, k, n, -16777216 );
-//        context.fill( RenderPipelines.GUI, m, l, context.getScaledWindowWidth(), n, -16777216 );
+        context.drawTexture( KaleidoscopesConstants.GUI_TEXTURED, KaleidoscopesConstants.KALEIDOSCOPE_TEXTURE, k, l, 0.0F, 0.0F, i, j, i, j );
+        //        context.drawTexture( RenderPipelines.GUI_TEXTURED, KaleidoscopesConstants.KALEIDOSCOPE_SCOPE, k, l, 0.0F, 0.0F, i, j, i, j );
+        context.fill( RenderPipelines.GUI, 0, n, context.getScaledWindowWidth(), context.getScaledWindowHeight(), -16777216 );
+        context.fill( RenderPipelines.GUI, 0, 0, context.getScaledWindowWidth(), l, -16777216 );
+        context.fill( RenderPipelines.GUI, 0, l, k, n, -16777216 );
+        context.fill( RenderPipelines.GUI, m, l, context.getScaledWindowWidth(), n, -16777216 );
+    }
+
+    public void setPostEffect( Identifier id )
+    {
+        MinecraftClient.getInstance().gameRenderer.setPostProcessor( id );
+    }
+
+    public void clearPostEffect()
+    {
+        MinecraftClient.getInstance().gameRenderer.setPostProcessor( null );
+        MinecraftClient.getInstance().gameRenderer.togglePostProcessorEnabled();
     }
 }
