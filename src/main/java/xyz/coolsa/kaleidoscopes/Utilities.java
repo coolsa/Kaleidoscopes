@@ -26,11 +26,4 @@ public class Utilities
 
         return item;
     }
-
-    public static SoundEvent registerSound( String name )
-    {
-        SoundEvent sound = SoundEvent.of( Identifier.of( Kaleidoscopes.ID, name ) );
-        Registry.register( Registries.SOUND_EVENT, sound.id(), sound );
-        return sound;
-    }
 }

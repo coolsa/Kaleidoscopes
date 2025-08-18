@@ -13,6 +13,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import xyz.coolsa.kaleidoscopes.Kaleidoscopes;
 import xyz.coolsa.kaleidoscopes.KaleidoscopesConstants;
+import xyz.coolsa.kaleidoscopes.client.KaleidoscopeClient;
 
 public class KaleidoscopeItem extends Item
 {
@@ -40,7 +41,7 @@ public class KaleidoscopeItem extends Item
     @Override
     public ActionResult use( World world, PlayerEntity user, Hand hand )
     {
-        user.playSound( KaleidoscopesConstants.KALEIDOSCOPE_START_USING, 1.0F, 1.0F );
+        user.playSound( KaleidoscopeClient.KALEIDOSCOPE_START_USING, 1.0F, 1.0F );
         user.incrementStat( Stats.USED.getOrCreateStat( this ) );
         return ItemUsage.consumeHeldItem( world, user, hand );
     }
@@ -61,6 +62,6 @@ public class KaleidoscopeItem extends Item
 
     private void playStopUsingSound( LivingEntity user )
     {
-        user.playSound( KaleidoscopesConstants.KALEIDOSCOPE_STOP_USING, 1.0F, 1.0F );
+        user.playSound( KaleidoscopeClient.KALEIDOSCOPE_STOP_USING, 1.0F, 1.0F );
     }
 }

@@ -20,10 +20,7 @@ import xyz.coolsa.kaleidoscopes.items.KaleidoscopeItem;
 public class KaleidoscopesConstants
 {
     public static final Item KALEIDOSCOPE_ITEM = Utilities.registerItem( "kaleidoscope_item", KaleidoscopeItem::new, new KaleidoscopeItem.Settings() );
-    public static final SoundEvent KALEIDOSCOPE_START_USING = Utilities.registerSound( "kaleidoscope_start_sound" );
-    public static final SoundEvent KALEIDOSCOPE_STOP_USING = Utilities.registerSound( "kaleidoscope_stop_sound" );
     public static final Identifier KALEIDOSCOPE_TEXTURE = Identifier.of(Kaleidoscopes.ID, "textures/misc/spyglass_scope.png");
-    public static final Identifier KALEIDOSCOPE_HUD = Identifier.of( Kaleidoscopes.ID, "hud" );
 
 
     public static void initialize()
@@ -32,8 +29,4 @@ public class KaleidoscopesConstants
         Kaleidoscopes.LOGGER.info( "Kaleidoscopes initialized" );
     }
 
-    public static void initializeClient()
-    {
-        HudElementRegistry.attachElementAfter( VanillaHudElements.MISC_OVERLAYS, KALEIDOSCOPE_HUD, new KaleidoscopeHud() );
-    }
 }
