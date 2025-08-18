@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "minecraft:amethyst_shard",
+    "+": "minecraft:spyglass",
+    "X": "minecraft:copper_ingot"
+  },
+  "pattern": [
+    "###",
+    " + ",
+    " X "
+  ],
+  "result": {
+    "count": 1,
+    "id": "kaleidoscopes:kaleidoscope_item"
+  }
+}

@@ -1,0 +1,14 @@
+{
+    "kaleidoscope_start_using": {
+        "subtitle": "subtitles.item.kaleidoscope_item.use",
+        "sounds": [
+            "kaleidoscopest:kaleidoscope_start_sound"
+        ]
+    },
+    "kaleidoscope_stop_using": {
+        "subtitle": "subtitles.item.kaleidoscope_item.stop_using",
+        "sounds": [
+            "kaleidoscopes:kaleidoscope_stop_sound"
+        ]
+    }
+}

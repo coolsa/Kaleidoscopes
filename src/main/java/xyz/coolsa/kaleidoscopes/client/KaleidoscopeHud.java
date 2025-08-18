@@ -68,7 +68,7 @@ public class KaleidoscopeHud implements HudElement
     {
         int i = ColorHelper.getWhite( opacity );
         context.drawTexture(
-            KaleidoscopesConstants.GUI_TEXTURED,
+            RenderPipelines.GUI_TEXTURED,
             KaleidoscopesConstants.KALEIDOSCOPE_TEXTURE,
             0,
             0,
@@ -92,7 +92,7 @@ public class KaleidoscopeHud implements HudElement
         int l = (context.getScaledWindowHeight() - j) / 2;
         int m = k + i;
         int n = l + j;
-        context.drawTexture( KaleidoscopesConstants.GUI_TEXTURED, KaleidoscopesConstants.KALEIDOSCOPE_TEXTURE, k, l, 0.0F, 0.0F, i, j, i, j );
+        context.drawTexture( RenderPipelines.GUI_TEXTURED, KaleidoscopesConstants.KALEIDOSCOPE_TEXTURE, k, l, 0.0F, 0.0F, i, j, i, j );
         //        context.drawTexture( RenderPipelines.GUI_TEXTURED, KaleidoscopesConstants.KALEIDOSCOPE_SCOPE, k, l, 0.0F, 0.0F, i, j, i, j );
         context.fill( RenderPipelines.GUI, 0, n, context.getScaledWindowWidth(), context.getScaledWindowHeight(), -16777216 );
         context.fill( RenderPipelines.GUI, 0, 0, context.getScaledWindowWidth(), l, -16777216 );
