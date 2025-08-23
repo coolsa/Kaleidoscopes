@@ -1,5 +1,6 @@
 package xyz.coolsa.kaleidoscopes;
 
+import net.minecraft.component.ComponentType;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -9,6 +10,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 public class Utilities
 {
@@ -32,5 +34,11 @@ public class Utilities
         SoundEvent sound = SoundEvent.of( Identifier.of( Kaleidoscopes.ID, name ) );
         Registry.register( Registries.SOUND_EVENT, sound.id(), sound );
         return sound;
+    }
+
+    public static <T> ComponentType<T> registerComponent( String id, UnaryOperator<ComponentType.Builder<T>> builderOperator )
+    {
+
+        return Registry.register( Registries.DATA_COMPONENT_TYPE, Identifier.of( Kaleidoscopes.ID, id), ((ComponentType.Builder) builderOperator.apply( ComponentType.builder() )).build() );
     }
 }

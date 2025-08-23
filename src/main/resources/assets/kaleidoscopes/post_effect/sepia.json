@@ -1,0 +1,88 @@
+{
+    "targets": {
+        "swap": { },
+        "final": { }
+    },
+    "passes": [
+        {
+            "vertex_shader": "kaleidoscopes:post/kaleidoscope",
+            "fragment_shader": "kaleidoscopes:post/kaleidoscope",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "minecraft:main"
+                },
+                {
+                    "sampler_name": "Texture",
+                    "location": "kaleidoscopes:kaleidoscopetest",
+                    "width": 512,
+                    "height": 512
+                }
+            ],
+            "output": "swap",
+            "uniforms": {
+                "KaledoscopeConfig": [
+                    {
+                        "name": "Segments",
+                        "type": "float",
+                        "value": 5.0
+                    },
+                    {
+                        "name": "ImagePortion",
+                        "type": "vec2",
+                        "value": [ 0.1, 0.1 ]
+                    }
+                ]
+            }
+        }, {
+            "vertex_shader": "minecraft:post/sobel",
+            "fragment_shader": "minecraft:post/color_convolve",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "swap"
+                }
+            ],
+            "output": "final",
+            "uniforms": {
+                "ColorConfig": [
+                    {
+                        "name": "RedMatrix",
+                        "type": "vec3",
+                        "value": [ 0.3, 0.59, 0.11]
+                    },
+                    {
+                        "name": "GreenMatrix",
+                        "type": "vec3",
+                        "value": [ 0.3, 0.59, 0.11 ]
+                    },
+                    {
+                        "name": "BlueMatrix",
+                        "type": "vec3",
+                        "value": [ 0.3, 0.59, 0.11 ]
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "minecraft:post/blit",
+            "fragment_shader": "minecraft:post/blit",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "final"
+                }
+            ],
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "ColorModulate",
+                        "type": "vec4",
+                        "value": [ 0.88, 0.51, 0.16, 1.0 ]
+                    }
+                ]
+            },
+            "output": "minecraft:main"
+        }
+    ]
+}
